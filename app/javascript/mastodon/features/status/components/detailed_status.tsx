@@ -26,6 +26,7 @@ import { Avatar } from '../../../components/avatar';
 import { DisplayName } from '../../../components/display_name';
 import MediaGallery from '../../../components/media_gallery';
 import StatusContent from '../../../components/status_content';
+import StatusReactions from '../../../components/status_reactions';
 import Audio from '../../audio';
 import scheduleIdleTask from '../../ui/util/schedule_idle_task';
 import Video from '../../video';
@@ -352,7 +353,6 @@ export const DetailedStatus: React.FC<{
             </>
           )}
         </Link>
-
         {status.get('spoiler_text').length > 0 && (
           <ContentWarning
             text={
@@ -363,7 +363,6 @@ export const DetailedStatus: React.FC<{
             onClick={handleExpandedToggle}
           />
         )}
-
         {expanded && (
           <>
             <StatusContent
@@ -376,7 +375,11 @@ export const DetailedStatus: React.FC<{
             {hashtagBar}
           </>
         )}
-
+        <StatusReactions
+          statusId={status.get('id')}
+          reactions={status.get('reactions')}
+          canReact={false}
+        />
         <div className='detailed-status__meta'>
           <div className='detailed-status__meta__line'>
             <a
